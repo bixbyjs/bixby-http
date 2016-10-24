@@ -30,6 +30,6 @@ exports = module.exports = function(settings) {
   return server;
 }
 
+exports['@implements'] = 'http://i.bixbyjs.org/http/Server';
 exports['@singleton'] = true;
 exports['@require'] = [ 'http://i.bixbyjs.org/Settings' ];
-exports['@implements'] = 'http://i.bixbyjs.org/http/Server';
