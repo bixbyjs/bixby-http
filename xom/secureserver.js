@@ -8,7 +8,7 @@ exports = module.exports = function(PKI, Crypto) {
       return resolve(server);
     }
     
-    Crypto.generateKey({ name: 'RSASSA-PKCS1-v1_5' }, function(err, pair) {
+    Crypto.generateKey({ algorithm: 'RSA' }, function(err, pair) {
       if (err) { return reject(err); }
     
       PKI.requestCert({}, pair.publicKey, { key: pair.privateKey }, function(err, cert) {
