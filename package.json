@@ -25,7 +25,11 @@
     }
   ],
   "main": "./app",
-  "dependencies": {},
+  "dependencies": {
+    "flowstate": "^0.4.0",
+    "fluidfactory": "^0.1.0",
+    "passport": "^0.3.2"
+  },
   "devDependencies": {
     "make-node": "0.3.x",
     "mocha": "2.x.x",

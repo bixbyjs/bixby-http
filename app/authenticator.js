@@ -11,7 +11,7 @@ exports = module.exports = function(container, logger) {
       // Register HTTP authentication scheme plugins.
       plugins.forEach(function(plugin, i) {
         authenticator.use(schemeDecls[i].a['@scheme'] || plugin.name, plugin);
-        logger.info('Registered HTTP authentication scheme: ' + (schemeDecls[i].a['@scheme'] || plugin.name));
+        logger.info('Loaded HTTP authentication scheme: ' + (schemeDecls[i].a['@scheme'] || plugin.name));
       });
     })
     .then(function() {
@@ -19,6 +19,6 @@ exports = module.exports = function(container, logger) {
     });
 }
 
+exports['@implements'] = 'http://i.bixbyjs.org/http/Authenticator';
 exports['@singleton'] = true;
 exports['@require'] = [ '!container', 'http://i.bixbyjs.org/Logger' ];
-exports['@implements'] = 'http://i.bixbyjs.org/http/Authenticator';
