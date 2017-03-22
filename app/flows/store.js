@@ -4,7 +4,7 @@ exports = module.exports = function(container) {
   
   var factory = new Factory();
   
-  var createFnDecls = container.specs('http://i.bixbyjs.org/http/flows/.createStoreFunc');
+  var createFnDecls = container.specs('http://i.bixbyjs.org/http/flows/.createStateStoreFunc');
   return Promise.all(createFnDecls.map(function(spec) { return container.create(spec.id); } ))
     .then(function(fns) {
       fns.forEach(function(fn, i) {
