@@ -8,4 +8,4 @@ exports = module.exports = function(container) {
   };
 };
 
-exports['@implements'] = 'http://i.bixbyjs.org/http/state/.createStoreFunc';
+exports['@implements'] = 'http://i.bixbyjs.org/http/flows/.createStoreFunc';

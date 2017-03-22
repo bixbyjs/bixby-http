@@ -1,0 +1,32 @@
+exports = module.exports = function(container, store, logger) {
+  var flowstate = require('flowstate');
+  
+  var dispatcher = new flowstate.Manager(store);
+  return dispatcher;
+  
+  // FIXME: Implement this again, when circular dependecny is fixed
+  //        (login/task/resume) needs this Dispatcher.
+  //        Also, electrolyte needs a test for this in promise based mode.
+  var taskDecls = container.specs('http://i.bixbyjs.org/http/flows/Prompt');
+  
+  return Promise.all(taskDecls.map(function(spec) { return container.create(spec.id); } ))
+    .then(function(tasks) {
+      tasks.forEach(function(task, i) {
+        var name = taskDecls[i].a['@name'];
+        dispatcher.use(name, task.begin, task.resume);
+        logger.info('Loaded web-based task: ' + name);
+      });
+    })
+    .then(function() {
+      return dispatcher;
+    });
+};
+
+// TODO: Rename this to http/flows/StateStore
+exports['@implements'] = 'http://i.bixbyjs.org/http/state/Dispatcher';
+exports['@singleton'] = true;
+exports['@require'] = [
+  '!container',
+  'http://i.bixbyjs.org/http/state/Store',
+  'http://i.bixbyjs.org/Logger'
+];
