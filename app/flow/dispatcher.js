@@ -22,7 +22,7 @@ exports = module.exports = function(container, store, logger) {
     });
 };
 
-// TODO: Rename this to http/flows/StateStore
+// TODO: Rename this to http/flow/Dispatcher
 exports['@implements'] = 'http://i.bixbyjs.org/http/state/Dispatcher';
 exports['@singleton'] = true;
 exports['@require'] = [

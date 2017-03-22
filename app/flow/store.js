@@ -4,7 +4,7 @@ exports = module.exports = function(container) {
   
   var factory = new Factory();
   
-  var createFnDecls = container.specs('http://i.bixbyjs.org/http/flows/.createStateStoreFunc');
+  var createFnDecls = container.specs('http://i.bixbyjs.org/http/flow/.createStateStoreFunc');
   return Promise.all(createFnDecls.map(function(spec) { return container.create(spec.id); } ))
     .then(function(fns) {
       fns.forEach(function(fn, i) {
@@ -16,7 +16,7 @@ exports = module.exports = function(container) {
     });
 };
 
-// TODO: Rename this to http/flows/StateStore
+// TODO: Rename this to http/flow/StateStore
 exports['@implements'] = 'http://i.bixbyjs.org/http/state/Store';
 exports['@singleton'] = true;
 exports['@require'] = [ '!container' ];
