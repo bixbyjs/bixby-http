@@ -25,6 +25,16 @@
     }
   ],
   "main": "./app",
+  "assembly": {
+    "namespace": "http",
+    "components": [
+      "authenticator",
+      "server",
+      "flow/dispatcher",
+      "flow/store",
+      "flow/store/session"
+    ]
+  },
   "dependencies": {
     "flowstate": "^0.4.0",
     "fluidfactory": "^0.1.0",
