@@ -16,7 +16,6 @@ exports = module.exports = function(container) {
     });
 };
 
-// TODO: Rename this to http/flow/StateStore
-exports['@implements'] = 'http://i.bixbyjs.org/http/state/Store';
+exports['@implements'] = 'http://i.bixbyjs.org/http/workflow/StateStore';
 exports['@singleton'] = true;
 exports['@require'] = [ '!container' ];
