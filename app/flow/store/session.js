@@ -1,4 +1,4 @@
-exports = module.exports = function(container) {
+exports = module.exports = function() {
   
   return function createSessionStore() {
     var flowstate = require('flowstate');
@@ -8,4 +8,4 @@ exports = module.exports = function(container) {
   };
 };
 
-exports['@implements'] = 'http://i.bixbyjs.org/http/flow/.createStateStoreFunc';
+exports['@implements'] = 'http://i.bixbyjs.org/http/workflow/createStateStoreImpl';
