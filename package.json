@@ -30,6 +30,8 @@
     "components": [
       "authenticator",
       "server",
+      "auth/bearer/scheme",
+      "auth/form/scheme",
       "flow/dispatcher",
       "flow/store",
       "flow/store/session"
