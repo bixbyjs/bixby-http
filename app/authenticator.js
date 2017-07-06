@@ -5,15 +5,23 @@ exports = module.exports = function(container, logger) {
   var authenticator = new passport.Authenticator();
   var schemeComps = container.components('http://i.bixbyjs.org/http/auth/Scheme');
   
-  return Promise.all(schemeComps.map(function(comp) { return comp.create(); } ))
-    .then(function(schemes) {
+  return Promise.resolve(authenticator)
+    .then(function(authenticator) {
       // Register HTTP authentication schemes.
-      schemes.forEach(function(scheme, i) {
-        authenticator.use(schemeComps[i].a['@scheme'] || scheme.name, scheme);
-        logger.info('Loaded HTTP authentication scheme: ' + (schemeComps[i].a['@scheme'] || scheme.name));
-      });
+      var schemeComps = container.components('http://i.bixbyjs.org/http/auth/Scheme');
+      
+      return Promise.all(schemeComps.map(function(comp) { return comp.create(); } ))
+        .then(function(schemes) {
+          schemes.forEach(function(scheme, i) {
+            authenticator.use(schemeComps[i].a['@scheme'] || scheme.name, scheme);
+            logger.info('Loaded HTTP authentication scheme: ' + (schemeComps[i].a['@scheme'] || scheme.name));
+          });
+        })
+        .then(function() {
+          return authenticator;
+        });
     })
-    .then(function() {
+    .then(function(authenticator) {
       return authenticator;
     });
 }
