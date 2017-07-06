@@ -22,6 +22,21 @@ exports = module.exports = function(container, logger) {
         });
     })
     .then(function(authenticator) {
+      // Register federated identity providers.
+      var providerComps = container.components('http://i.bixbyjs.org/http/auth/Provider');
+      
+      return Promise.all(providerComps.map(function(comp) { return comp.create(); } ))
+        .then(function(providers) {
+          providers.forEach(function(provider, i) {
+            authenticator.use(providerComps[i].a['@provider'], provider);
+            logger.info('Loaded federated identity provider: ' + (providerComps[i].a['@provider']));
+          });
+        })
+        .then(function() {
+          return authenticator;
+        });
+    })
+    .then(function(authenticator) {
       return authenticator;
     });
 }
