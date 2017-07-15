@@ -3,7 +3,6 @@ exports = module.exports = function(container, logger) {
   var passport = require('passport');
   
   var authenticator = new passport.Authenticator();
-  var schemeComps = container.components('http://i.bixbyjs.org/http/auth/Scheme');
   
   return Promise.resolve(authenticator)
     .then(function(authenticator) {
