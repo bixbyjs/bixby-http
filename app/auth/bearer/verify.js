@@ -1,21 +1,27 @@
-exports = module.exports = function(authenticateToken, Tokens) {
+exports = module.exports = function(authenticate) {
   
   return function verify(req, token, cb) {
-    
-    Tokens.decipher(token, function(err, claims, issuer) {
+    authenticate(token, function(err, tkn, ctx) {
       if (err) { return cb(err); }
       
       // TODO: Check confirmation methods, etc
       
-      authenticateToken(claims.subject, issuer, function(err, user) {
-        if (err) { return cb(err); }
-        return cb(null, user);
-      });
+      var info = {};
+      if (ctx.client) {
+        info.client = ctx.client;
+      }
+      if (ctx.scope) {
+        info.scope = ctx.scope;
+      }
+      
+      if (!ctx.subject) {
+        return cb(null, false);
+      }
+      return cb(null, ctx.subject, info);
     });
   };
 };
 
 exports['@require'] = [
-  'http://i.bixbyjs.org/security/authentication/token/authenticate',
-  'http://i.bixbyjs.org/tokens'
+  'http://i.bixbyjs.org/security/authentication/token/authenticate'
 ];
