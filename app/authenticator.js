@@ -1,13 +1,14 @@
-exports = module.exports = function(container, logger) {
+exports = module.exports = function(IoC, logger) {
   // Load modules.
   var passport = require('passport');
+  
   
   var authenticator = new passport.Authenticator();
   
   return Promise.resolve(authenticator)
     .then(function(authenticator) {
       // Register HTTP authentication schemes.
-      var schemeComps = container.components('http://i.bixbyjs.org/http/auth/Scheme');
+      var schemeComps = IoC.components('http://i.bixbyjs.org/http/auth/Scheme');
       
       return Promise.all(schemeComps.map(function(comp) { return comp.create(); } ))
         .then(function(schemes) {
@@ -22,7 +23,7 @@ exports = module.exports = function(container, logger) {
     })
     .then(function(authenticator) {
       // Register federated identity providers.
-      var providerComps = container.components('http://i.bixbyjs.org/http/auth/Provider');
+      var providerComps = IoC.components('http://i.bixbyjs.org/http/auth/Provider');
       
       return Promise.all(providerComps.map(function(comp) { return comp.create(); } ))
         .then(function(providers) {
