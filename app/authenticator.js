@@ -37,6 +37,21 @@ exports = module.exports = function(IoC, logger) {
         });
     })
     .then(function(authenticator) {
+      // Add session support, if required components are available.
+      return IoC.create('http://i.bixbyjs.org/http/auth/SessionManager')
+        .then(
+          function(sessionManager) {
+            authenticator.serializeUser(sessionManager.serializeUser);
+            authenticator.deserializeUser(sessionManager.deserializeUser);
+          }, function(err) {
+            logger.notice('HTTP session management not available')
+          }
+        )
+        .then(function() {
+          return authenticator;
+        });
+    })
+    .then(function(authenticator) {
       return authenticator;
     });
 }
