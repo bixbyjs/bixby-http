@@ -28,7 +28,6 @@
   "assembly": {
     "namespace": "http",
     "components": [
-      "authenticator",
       "server",
       "auth/anonymous/scheme",
       "auth/bearer/scheme",
