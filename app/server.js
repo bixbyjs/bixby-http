@@ -1,7 +1,10 @@
-exports = module.exports = function(container, settings) {
+exports = module.exports = function(container, settings, logger) {
+  
   // Load modules.
   var http = require('http')
     , https = require('https');
+  
+  var normalizePort = require('../lib/utils').normalizePort;
   
   
   settings = settings.isolate(this.baseNS);
@@ -29,6 +32,21 @@ exports = module.exports = function(container, settings) {
     //server = https.createServer(opts);
   } else {
     server = http.createServer();
+    
+    
+    server.once('listening', function() {
+      var addr = this.address();
+      logger.info('HTTP server listening on %s:%d', addr.address, addr.port);
+    });
+
+    var opts = options || {};
+    
+    console.log(opts);
+
+    var address = opts.address;
+    var port = opts.port !== undefined ? opts.port : (normalizePort(process.env.PORT) || 8080);
+
+    server.listen(port, address);
   }
   
   return server;
@@ -36,4 +54,8 @@ exports = module.exports = function(container, settings) {
 
 exports['@implements'] = 'http://i.bixbyjs.org/http/Server';
 exports['@singleton'] = true;
-exports['@require'] = [ '!container', 'http://i.bixbyjs.org/Settings' ];
+exports['@require'] = [
+  '!container',
+  'http://i.bixbyjs.org/Settings',
+  'http://i.bixbyjs.org/Logger'
+];
