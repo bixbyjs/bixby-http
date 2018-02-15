@@ -2,6 +2,12 @@ exports = module.exports = function(PKI, Crypto) {
   var https = require('https');
   
   
+  // TODO: Investigate options for obtaining a certificate from a CA
+  //       or self-signing a certificate automatically at run-time.
+  //       https://www.npmjs.com/package/keypair
+  //       https://www.npmjs.com/package/akeypair
+  
+  
   return new Promise(function(resolve, reject) {
     function createServer(options) {
       var server = https.createServer(options);
