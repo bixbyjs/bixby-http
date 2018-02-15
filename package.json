@@ -40,7 +40,6 @@
   "dependencies": {
     "flowstate": "^0.4.0",
     "fluidfactory": "^0.1.0",
-    "passport": "^0.3.2",
     "passport-anonymous": "^1.0.1",
     "passport-http-bearer": "^1.0.1"
   },
