@@ -23,7 +23,6 @@ exports = module.exports = function(container, settings, logger) {
 }
 
 exports['@implements'] = 'http://i.bixbyjs.org/http/Server';
-exports['@singleton'] = true;
 exports['@require'] = [
   '!container',
   'http://i.bixbyjs.org/Settings',
