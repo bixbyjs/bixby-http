@@ -20,7 +20,7 @@ exports = module.exports = function(container, settings, logger) {
   server.listen(port, address);
   
   return server;
-}
+};
 
 exports['@implements'] = 'http://i.bixbyjs.org/http/Server';
 exports['@require'] = [
