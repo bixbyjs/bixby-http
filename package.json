@@ -30,10 +30,7 @@
     "components": [
       "server",
       "auth/anonymous/scheme",
-      "auth/bearer/scheme",
-      "workflow/dispatcher",
-      "workflow/statestore",
-      "workflow/statestore/session"
+      "auth/bearer/scheme"
     ]
   },
   "dependencies": {
