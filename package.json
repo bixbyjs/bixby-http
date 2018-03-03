@@ -28,14 +28,12 @@
   "assembly": {
     "namespace": "http",
     "components": [
-      "server",
       "auth/anonymous/scheme",
-      "auth/bearer/scheme"
+      "auth/bearer/scheme",
+      "server"
     ]
   },
   "dependencies": {
-    "flowstate": "^0.4.0",
-    "fluidfactory": "^0.1.0",
     "passport-anonymous": "^1.0.1",
     "passport-http-bearer": "^1.0.1"
   },
