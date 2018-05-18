@@ -7,17 +7,17 @@ exports = module.exports = function(authenticate) {
       // TODO: Check confirmation methods, etc
       
       var info = {};
-      if (ctx.client) {
-        info.client = ctx.client;
+      if (tkn.client) {
+        info.client = tkn.client;
       }
-      if (ctx.scope) {
-        info.scope = ctx.scope;
+      if (tkn.scope) {
+        info.scope = tkn.scope;
       }
       
-      if (!ctx.subject) {
+      if (!tkn.subject) {
         return cb(null, false);
       }
-      return cb(null, ctx.subject, info);
+      return cb(null, tkn.subject, info);
     });
   };
 };
