@@ -14,10 +14,10 @@ exports = module.exports = function(authenticate) {
         info.scope = tkn.scope;
       }
       
-      if (!tkn.subject) {
+      if (!tkn.user) {
         return cb(null, false);
       }
-      return cb(null, tkn.subject, info);
+      return cb(null, tkn.user, info);
     });
   };
 };
