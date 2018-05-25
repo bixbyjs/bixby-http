@@ -1,23 +1,25 @@
 exports = module.exports = function(authenticate) {
   
   return function verify(req, token, cb) {
-    authenticate(token, function(err, tkn, ctx) {
+    
+    authenticate(token, function(err, msg, conditions, issuer) {
       if (err) { return cb(err); }
       
       // TODO: Check confirmation methods, etc
       
       var info = {};
-      if (tkn.client) {
-        info.client = tkn.client;
+      if (msg.scope) {
+        info.scope = msg.scope;
       }
-      if (tkn.scope) {
-        info.scope = tkn.scope;
+      if (msg.client) {
+        info.client = msg.client;
+      }
+      if (issuer) {
+        info.issuer = issuer;
       }
       
-      if (!tkn.user) {
-        return cb(null, false);
-      }
-      return cb(null, tkn.user, info);
+      // TODO: Support for authenticating the issuer, in self-issued scenarios without `sub`
+      return cb(null, msg.user, info);
     });
   };
 };
