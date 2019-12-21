@@ -1,4 +1,4 @@
-exports = module.exports = function(container, /*settings,*/ logger) {
+exports = module.exports = function(container, settings, logger) {
   // Load modules.
   var http = require('http')
     , normalizePort = require('../lib/utils').normalizePort;
@@ -13,6 +13,13 @@ exports = module.exports = function(container, /*settings,*/ logger) {
     logger.info('HTTP server listening on %s:%d', addr.address, addr.port);
   });
   
+  // --http-server-address --http-server-port
+  // settings.get('http/server/address');
+  
+  console.log('SETTINGS:');
+  //console.log(settings.toObject());
+  //console.log(settings.get('http'));
+  
   //var options = settings.get('http/server') || {};
   var options = {};
   var address = options.address;
@@ -26,6 +33,6 @@ exports = module.exports = function(container, /*settings,*/ logger) {
 exports['@implements'] = 'http://i.bixbyjs.org/http/Server';
 exports['@require'] = [
   '!container',
-  //'http://i.bixbyjs.org/Settings',
+  'http://i.bixbyjs.org/Settings',
   'http://i.bixbyjs.org/Logger'
 ];

@@ -4,6 +4,6 @@ exports = module.exports = function(verify) {
   return new Strategy();
 };
 
-exports['@implements'] = 'http://i.bixbyjs.org/http/auth/Scheme';
+exports['@implements'] = 'x-http://i.bixbyjs.org/http/auth/Scheme';
 exports['@scheme'] = 'anonymous';
 exports['@require'] = [];
