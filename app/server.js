@@ -8,6 +8,9 @@ exports = module.exports = function(container, settings, logger) {
   //       https://github.com/bixbyjs/bixby-express/blob/768baba27a9ad762ca648e27e12f0c366e3886d2/lib/boot/httpserver.js
   
   var server = http.createServer();
+  return server;
+  
+  
   server.once('listening', function() {
     var addr = this.address();
     logger.info('HTTP server listening on %s:%d', addr.address, addr.port);
