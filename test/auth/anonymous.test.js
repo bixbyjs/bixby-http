@@ -7,7 +7,7 @@ var factory = require('../../app/auth/anonymous');
 var Strategy = require('passport-anonymous');
 
 
-describe('auth/bearer/scheme', function() {
+describe('auth/anonymous', function() {
   
   it('should export factory function', function() {
     expect(factory).to.be.a('function');

@@ -27,7 +27,6 @@ exports = module.exports = function(PKI, Crypto) {
 }
 
 exports['@implements'] = 'http://i.bixbyjs.org/http/SecureServer';
-exports['@singleton'] = true;
 exports['@require'] = [
   'http://i.bixbyjs.org/pki',
   'http://i.bixbyjs.org/crypto'

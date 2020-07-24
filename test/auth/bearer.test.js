@@ -7,7 +7,7 @@ var factory = require('../../app/auth/bearer');
 var Strategy = require('passport-http-bearer');
 
 
-describe('auth/bearer/scheme', function() {
+describe('auth/bearer', function() {
   
   it('should export factory function', function() {
     expect(factory).to.be.a('function');
