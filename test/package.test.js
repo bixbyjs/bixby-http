@@ -10,7 +10,7 @@ describe('bixby-http', function() {
       
       expect(json.assembly.components).to.have.length(3);
       expect(json.assembly.components).to.include('server');
-      expect(json.assembly.components).to.include('auth/anonymous/scheme');
+      expect(json.assembly.components).to.include('auth/anonymous');
       expect(json.assembly.components).to.include('auth/bearer');
     });
   });
