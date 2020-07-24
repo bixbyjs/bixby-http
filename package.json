@@ -29,7 +29,7 @@
     "namespace": "http",
     "components": [
       "auth/anonymous/scheme",
-      "auth/bearer/scheme",
+      "auth/bearer",
       "server"
     ]
   },

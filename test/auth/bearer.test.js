@@ -3,7 +3,7 @@
 var $require = require('proxyquire');
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var factory = require('../../../app/auth/bearer/scheme');
+var factory = require('../../app/auth/bearer');
 var Strategy = require('passport-http-bearer');
 
 
@@ -32,7 +32,7 @@ describe('auth/bearer/scheme', function() {
     
     var StrategySpy = sinon.spy(Strategy);
     
-    var factory = $require('../../../app/auth/bearer/scheme',
+    var factory = $require('../../app/auth/bearer',
       { 'passport-http-bearer': StrategySpy });
     var strategy = factory(tokens);
     
@@ -93,7 +93,7 @@ describe('auth/bearer/scheme', function() {
     
     var StrategySpy = sinon.spy(Strategy);
     
-    var factory = $require('../../../app/auth/bearer/scheme',
+    var factory = $require('../../app/auth/bearer',
       { 'passport-http-bearer': StrategySpy });
     var strategy = factory(tokens);
     
@@ -151,7 +151,7 @@ describe('auth/bearer/scheme', function() {
     
     var StrategySpy = sinon.spy(Strategy);
     
-    var factory = $require('../../../app/auth/bearer/scheme',
+    var factory = $require('../../app/auth/bearer',
       { 'passport-http-bearer': StrategySpy });
     var strategy = factory(tokens);
     
