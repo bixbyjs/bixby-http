@@ -2,7 +2,8 @@ exports = module.exports = function(authenticate) {
   
   return function verify(req, token, cb) {
     
-    authenticate(token, { issuer: 'sts-local' }, function(err, msg, conditions, issuer) {
+    //authenticate(token, { issuer: 'sts-local' }, function(err, msg, conditions, issuer) {
+    authenticate(token, {}, function(err, msg, conditions, issuer) {
       if (err) { return cb(err); }
       
       // TODO: Check confirmation methods, etc
