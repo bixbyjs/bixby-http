@@ -194,4 +194,56 @@ describe('auth/bearer/scheme', function() {
     
   }); // verifying token without client
   
+  describe('encountering error while verifying token', function() {
+    var tokens = new Object();
+    tokens.verify = sinon.stub().yieldsAsync(new Error('something went wrong'));
+    
+    var StrategySpy = sinon.spy(Strategy);
+    
+    var factory = $require('../../app/auth/bearer',
+      { 'passport-http-bearer': StrategySpy });
+    var strategy = factory(tokens);
+    
+    it('should construct strategy', function() {
+      expect(StrategySpy).to.have.been.calledOnce;
+      expect(StrategySpy).to.have.been.calledWith({ passReqToCallback: true });
+    });
+    
+    it('should return strategy', function() {
+      expect(strategy).to.be.an.instanceOf(Strategy);
+    });
+    
+    describe('verify', function() {
+      var error, user, info;
+      
+      before(function(done) {
+        var verify = StrategySpy.args[0][1];
+        verify({}, '2YotnFZFEjr1zCsicMWpAA', function(e, u, i) {
+          error = e;
+          user = u;
+          info = i;
+          done();
+        });
+      });
+      
+      it('should verify token', function() {
+        expect(tokens.verify).to.calledOnceWith('2YotnFZFEjr1zCsicMWpAA');
+      });
+      
+      it('should yield error', function() {
+        expect(error).to.be.an.instanceOf(Error);
+        expect(error.message).to.equal('something went wrong');
+      });
+    
+      it('should not yield user', function() {
+        expect(user).to.be.undefined;
+      });
+    
+      it('should not yield info', function() {
+        expect(info).to.be.undefined;
+      });
+    }); // verify
+    
+  }); // encountering error while verifying token
+  
 });
