@@ -22,11 +22,11 @@ describe('auth/bearer/scheme', function() {
   describe('verifying token', function() {
     var tokens = new Object();
     tokens.verify = sinon.stub().yieldsAsync(null, {
-      client: {
-        id: 's6BhdRkqt3'
-      },
       user: {
         id: '248289761001'
+      },
+      client: {
+        id: 's6BhdRkqt3'
       }
     });
     
@@ -78,5 +78,67 @@ describe('auth/bearer/scheme', function() {
     }); // verify
     
   }); // verifying token
+  
+  describe('verifying token with scope', function() {
+    var tokens = new Object();
+    tokens.verify = sinon.stub().yieldsAsync(null, {
+      user: {
+        id: '248289761001'
+      },
+      client: {
+        id: 's6BhdRkqt3'
+      },
+      scope: [ 'profile', 'email' ]
+    });
+    
+    var StrategySpy = sinon.spy(Strategy);
+    
+    var factory = $require('../../../app/auth/bearer/scheme',
+      { 'passport-http-bearer': StrategySpy });
+    var strategy = factory(tokens);
+    
+    it('should construct strategy', function() {
+      expect(StrategySpy).to.have.been.calledOnce;
+      expect(StrategySpy).to.have.been.calledWith({ passReqToCallback: true });
+    });
+    
+    it('should return strategy', function() {
+      expect(strategy).to.be.an.instanceOf(Strategy);
+    });
+    
+    describe('verify', function() {
+      var user, info;
+      
+      before(function(done) {
+        var verify = StrategySpy.args[0][1];
+        verify({}, '2YotnFZFEjr1zCsicMWpAA', function(e, u, i) {
+          if (e) { return done(e); }
+          user = u;
+          info = i;
+          done();
+        });
+      });
+      
+      it('should verify token', function() {
+        expect(tokens.verify).to.calledOnceWith('2YotnFZFEjr1zCsicMWpAA');
+      });
+      
+      it('should yield user', function() {
+        expect(user).to.deep.equal({
+          id: '248289761001'
+        });
+      });
+      
+      it('should yield info', function() {
+        expect(info).to.deep.equal({
+          client: {
+            id: 's6BhdRkqt3'
+          },
+          scope: [ 'profile', 'email' ]
+        });
+      });
+    }); // verify
+    
+  }); // verifying token with scope
   
 });
