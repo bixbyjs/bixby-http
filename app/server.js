@@ -8,5 +8,5 @@ exports = module.exports = function() {
   return server;
 };
 
-exports['@implements'] = 'http://i.bixbyjs.org/http/Server';
+exports['@implements'] = 'module:http.Server';
 exports['@require'] = [];

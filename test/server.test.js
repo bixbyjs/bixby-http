@@ -10,7 +10,7 @@ describe('server', function() {
   });
   
   it('should be annotated', function() {
-    expect(factory['@implements']).to.equal('http://i.bixbyjs.org/http/Server');
+    expect(factory['@implements']).to.equal('module:http.Server');
     expect(factory['@singleton']).to.equal(undefined);
   });
   
