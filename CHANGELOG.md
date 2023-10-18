@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Renamed `http://i.bixbyjs.org/http/Server` interface to `module:http.Server`,
 adopting [JSDoc](https://jsdoc.app/) [namepaths](https://jsdoc.app/about-namepaths.html)
-for naming interfaces.
+for interface names.
 
 ## [0.2.2] - 2020-10-01
 
