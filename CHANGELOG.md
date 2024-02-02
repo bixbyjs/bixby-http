@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- `auth/bearer` component implements `module:passport.Strategy` interface rather
+than `http://i.bixbyjs.org/http/auth/Scheme`, adopting [JSDoc](https://jsdoc.app/) [namepaths](https://jsdoc.app/about-namepaths.html) for interface names.
 
 ## [0.2.3] - 2023-10-18
 ### Changed

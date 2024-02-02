@@ -27,7 +27,7 @@ exports = module.exports = function(tokens) {
   return strategy;
 };
 
-exports['@implements'] = 'http://i.bixbyjs.org/http/auth/Scheme';
+exports['@implements'] = 'module:passport.Strategy';
 exports['@scheme'] = 'bearer';
 exports['@require'] = [
   'http://i.bixbyjs.org/security/TokenService'
